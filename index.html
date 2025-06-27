@@ -10,4 +10,58 @@
 /assets
   ├── logo.png          # Logo moderno de IA
   ├── icon-set/         # Íconos (chat, imagen, análisis, texto)
-mnwejknc
+// Estructura base Next.js + Tailwind CSS + UI atractivo con shadcn/ui
+// Asegúrate de tener Tailwind y shadcn/ui configurados (https://ui.shadcn.com/docs/installation)
+
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+
+const menuItems = [
+  { name: 'Inicio', path: '/' },
+  { name: 'Redactor de textos', path: '/redactor' },
+  { name: 'Generador de imágenes', path: '/imagenes' },
+  { name: 'Lector de texto (voz)', path: '/tts' },
+  { name: 'Planes', path: '/planes' },
+  { name: 'Perfil', path: '/perfil' },
+];
+
+export default function Layout({ children }: { children: React.ReactNode }) {
+  const pathname = usePathname();
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <nav className="bg-white shadow sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between h-16">
+            <div className="flex items-center space-x-4">
+              {menuItems.map((item) => (
+                <Link key={item.path} href={item.path}>
+                  <Button
+                    variant={pathname === item.path ? 'default' : 'ghost'}
+                    className={cn(
+                      'rounded-xl px-4 py-2 text-sm font-medium',
+                      pathname === item.path && 'bg-blue-600 text-white'
+                    )}
+                  >
+                    {item.name}
+                  </Button>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      <main className="p-6 max-w-6xl mx-auto">
+        <Card className="p-6 shadow-md rounded-2xl bg-white">
+          {children}
+        </Card>
+      </main>
+    </div>
+  );
+}
