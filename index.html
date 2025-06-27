@@ -2,109 +2,28 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Plataforma IA</title>
+  <title>Inicio - Plataforma IA</title>
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #ffffff;
-      color: #111111;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    body.dark-mode {
-      background-color: #111111;
-      color: #ffffff;
-    }
-
-    header {
-      background-color: #000000;
-      padding: 1em 0;
-    }
-
-    .navbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .logo {
-      font-size: 1.5em;
-      font-weight: bold;
-      color: #ffffff;
-    }
-
-    .nav-links {
-      list-style: none;
-      display: flex;
-      gap: 20px;
-    }
-
-    .nav-links li a {
-      color: #cccccc;
-      text-decoration: none;
-      transition: color 0.2s, transform 0.2s;
-    }
-
-    .nav-links li a:hover {
-      color: #ffffff;
-      transform: scale(1.05);
-    }
-
-    .toggle-switch {
-      cursor: pointer;
-      color: #ffffff;
-      font-size: 0.9em;
-    }
-
-    main {
-      padding: 60px 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    .contenedor {
-      background-color: #f4f4f4;
-      padding: 30px;
-      border-radius: 10px;
-      border: 1px solid #dddddd;
-      transition: background-color 0.3s;
-    }
-
-    body.dark-mode .contenedor {
-      background-color: #222222;
-      border-color: #444444;
-    }
-
-    #loading {
-      display: none;
-      text-align: center;
-      padding: 10px;
-      font-size: 0.9em;
-    }
-
-    #loading.active {
-      display: block;
-    }
+    /* Estilos generales: idénticos para todas las páginas (se omite repetición aquí por brevedad) */
+    body { margin: 0; font-family: 'Inter', sans-serif; background-color: #ffffff; color: #111111; transition: background-color 0.3s, color 0.3s; }
+    body.dark-mode { background-color: #111111; color: #ffffff; }
+    header { background-color: #000000; padding: 1em 0; }
+    .navbar { display: flex; justify-content: space-between; align-items: center; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+    .logo { font-size: 1.5em; font-weight: bold; color: #ffffff; }
+    .nav-links { list-style: none; display: flex; gap: 20px; }
+    .nav-links li a { color: #cccccc; text-decoration: none; transition: color 0.2s, transform 0.2s; }
+    .nav-links li a:hover { color: #ffffff; transform: scale(1.05); }
+    .toggle-switch { cursor: pointer; color: #ffffff; font-size: 0.9em; }
+    main { padding: 60px 20px; max-width: 800px; margin: auto; }
+    .contenedor { background-color: #f4f4f4; padding: 30px; border-radius: 10px; border: 1px solid #dddddd; transition: background-color 0.3s, border-color 0.3s; }
+    body.dark-mode .contenedor { background-color: #222222; border-color: #444444; }
+    #loading { display: none; text-align: center; padding: 10px; font-size: 0.9em; }
+    #loading.active { display: block; }
   </style>
 </head>
 <body>
 
-<header>
-  <nav class="navbar">
-    <div class="logo">Plataforma IA</div>
-    <ul class="nav-links">
-      <li><a href="generador-imagenes.html">Generador de Imágenes</a></li>
-      <li><a href="lector.html">Lector de Texto</a></li>
-      <li><a href="generador-audio.html">Generador de Audio</a></li>
-      <li><a href="generador-video.html">Generador de Video</a></li>
-    </ul>
-    <div class="toggle-switch" onclick="toggleDarkMode()">🌓 Modo Oscuro</div>
-  </nav>
-</header>
+  <div id="navbar-placeholder"></div>
 
   <main>
     <section class="contenedor">
@@ -115,18 +34,19 @@
   </main>
 
   <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+        const links = document.querySelectorAll('.nav-links a');
+        links.forEach(link => link.addEventListener('click', () => {
+          document.getElementById('loading').classList.add('active');
+        }));
+      });
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
     }
-
-    // Mostrar el indicador de carga cuando se haga clic en los enlaces del menú
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('loading').classList.add('active');
-      });
-    });
   </script>
+
 </body>
 </html>
-
