@@ -153,37 +153,26 @@
     </nav>
   </header>
 
-  <main>
-    <section class="contenedor">
-      <h1>Generador de Imágenes</h1>
-      <p>Describe con palabras la imagen que deseas generar y esta herramienta simulará el resultado.</p>
-      <input type="text" id="descripcionImagen" placeholder="Ejemplo: un atardecer sobre montañas nevadas..." />
-      <button onclick="generarImagen()">Generar Imagen</button>
-      <div id="loading">Cargando herramienta...</div>
-      <div id="imagenGenerada" class="resultado"></div>
-    </section>
-  </main>
+<main>
+  <section class="contenedor">
+    <h1>Generador de Imágenes</h1>
+    <p>Describe con palabras la imagen que deseas generar y esta herramienta simulará el resultado.</p>
+    <input type="text" id="descripcionImagen" placeholder="Ejemplo: un atardecer sobre montañas nevadas..." />
+    <button onclick="generarImagen()">Generar Imagen</button>
+    <div id="loading">Cargando herramienta...</div>
+    <div id="imagenGenerada" class="resultado"></div>
+  </section>
+</main>
 
-  <script>
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
-
-    function generarImagen() {
-      const descripcion = document.getElementById("descripcionImagen").value.trim();
-      const salida = descripcion
-        ? `Simulación: Imagen generada para "${descripcion}".`
-        : "Por favor, escribe una descripción válida.";
-      document.getElementById("imagenGenerada").innerText = salida;
-    }
-
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('loading').classList.add('active');
-      });
-    });
-  </script>
+<script>
+  function generarImagen() {
+    const descripcion = document.getElementById("descripcionImagen").value.trim();
+    const salida = descripcion
+      ? `Simulación: Imagen generada para "${descripcion}".`
+      : "Por favor, escribe una descripción válida.";
+    document.getElementById("imagenGenerada").innerText = salida;
+  }
+</script>
 
 </body>
 </html>
