@@ -1,67 +1,142 @@
-/frontend
-  ├── index.html        # Página principal
-  ├── styles.css        # Estilos llamativos
-  └── scripts.js        # Lógica del frontend
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>✨ Plataforma IA Multitarea</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-/backend
-  ├── server.js         # Node.js con endpoints para cada IA
-  └── .env              # Clave API de OpenAI
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      color: #333;
+      padding: 40px;
+    }
 
-/assets
-  ├── logo.png          # Logo moderno de IA
-  ├── icon-set/         # Íconos (chat, imagen, análisis, texto)
-// Estructura base Next.js + Tailwind CSS + UI atractivo con shadcn/ui
-// Asegúrate de tener Tailwind y shadcn/ui configurados (https://ui.shadcn.com/docs/installation)
+    h1 {
+      font-size: 2.5em;
+      color: #111;
+      margin-bottom: 30px;
+      text-align: center;
+    }
 
-'use client';
+    section {
+      background-color: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 30px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
+    h2 {
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      color: #2d3748;
+    }
 
-const menuItems = [
-  { name: 'Inicio', path: '/' },
-  { name: 'Redactor de textos', path: '/redactor' },
-  { name: 'Generador de imágenes', path: '/imagenes' },
-  { name: 'Lector de texto (voz)', path: '/tts' },
-  { name: 'Planes', path: '/planes' },
-  { name: 'Perfil', path: '/perfil' },
-];
+    input, textarea, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #cbd5e0;
+      border-radius: 8px;
+      font-size: 1em;
+    }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname();
+    button {
+      background-color: #4f46e5;
+      color: white;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s ease;
+      margin-top: 12px;
+    }
 
-  return (
-    <div className="min-h-screen bg-gray-100">
-      <nav className="bg-white shadow sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center space-x-4">
-              {menuItems.map((item) => (
-                <Link key={item.path} href={item.path}>
-                  <Button
-                    variant={pathname === item.path ? 'default' : 'ghost'}
-                    className={cn(
-                      'rounded-xl px-4 py-2 text-sm font-medium',
-                      pathname === item.path && 'bg-blue-600 text-white'
-                    )}
-                  >
-                    {item.name}
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
+    button:hover {
+      background-color: #4338ca;
+    }
 
-      <main className="p-6 max-w-6xl mx-auto">
-        <Card className="p-6 shadow-md rounded-2xl bg-white">
-          {children}
-        </Card>
-      </main>
-    </div>
-  );
-}
+    #textoGenerado, #resultadoBusqueda, #imagenGenerada, #avGenerado {
+      margin-top: 12px;
+      padding: 10px;
+      background-color: #edf2f7;
+      border-radius: 8px;
+      min-height: 40px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🤖 Plataforma IA Multitarea</h1>
+
+  <section id="generador-texto">
+    <h2>✍️ Generador de Texto</h2>
+    <textarea id="inputTexto" rows="3" placeholder="Escribe tu idea..."></textarea>
+    <button onclick="generarTexto()">Generar</button>
+    <div id="textoGenerado"></div>
+  </section>
+
+  <section id="buscador">
+    <h2>🔎 Buscador Inteligente</h2>
+    <input type="text" id="busqueda" placeholder="¿Qué quieres investigar?">
+    <button onclick="buscar()">Buscar</button>
+    <div id="resultadoBusqueda"></div>
+  </section>
+
+  <section id="imagenes">
+    <h2>🖼️ Generador de Imágenes</h2>
+    <input type="text" id="descripcionImagen" placeholder="Describe tu imagen ideal...">
+    <button onclick="generarImagen()">Crear Imagen</button>
+    <div id="imagenGenerada"></div>
+  </section>
+
+  <section id="lector">
+    <h2>🔊 Lector de Texto</h2>
+    <textarea id="textoParaLeer" rows="2" placeholder="Introduce texto a leer..."></textarea>
+    <button onclick="leerTexto()">Reproducir voz</button>
+  </section>
+
+  <section id="audio-video">
+    <h2>🎵🎬 Generador de Audio y Video</h2>
+    <input type="text" id="descripcionAV" placeholder="Describe tu idea multimedia...">
+    <button onclick="generarAV()">Generar</button>
+    <div id="avGenerado"></div>
+  </section>
+
+  <script>
+    function generarTexto() {
+      let texto = document.getElementById("inputTexto").value;
+      document.getElementById("textoGenerado").innerText = "📝 Texto generado: " + texto.toUpperCase();
+    }
+
+    function buscar() {
+      let query = document.getElementById("busqueda").value;
+      document.getElementById("resultadoBusqueda").innerText = "🔎 Resultados simulados para: " + query;
+    }
+
+    function generarImagen() {
+      let descripcion = document.getElementById("descripcionImagen").value;
+      document.getElementById("imagenGenerada").innerHTML = `<p>🖼️ Imagen creada para: <em>${descripcion}</em></p>`;
+    }
+
+    function leerTexto() {
+      let texto = document.getElementById("textoParaLeer").value;
+      let speech = new SpeechSynthesisUtterance(texto);
+      window.speechSynthesis.speak(speech);
+    }
+
+    function generarAV() {
+      let descripcion = document.getElementById("descripcionAV").value;
+      document.getElementById("avGenerado").innerHTML = `<p>🎬 Simulación de contenido generado para: "${descripcion}"</p>`;
+    }
+  </script>
+
+</body>
+</html>
