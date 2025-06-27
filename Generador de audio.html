@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Generador de Texto - Plataforma IA</title>
+  <title>Generador de Audio - Plataforma IA</title>
   <style>
+    /* Mismos estilos usados antes para coherencia */
     body {
       margin: 0;
       font-family: 'Inter', sans-serif;
@@ -109,45 +110,16 @@
     button:hover {
       background-color: #1a1a1a;
     }
-
-    .resultado {
-      margin-top: 20px;
-      background-color: #e6e6e6;
-      padding: 12px;
-      border-radius: 6px;
-      min-height: 40px;
-      color: #222222;
-      transition: background-color 0.3s, color 0.3s;
-    }
-
-    body.dark-mode .resultado {
-      background-color: #2a2a2a;
-      color: #dddddd;
-    }
-
-    #loading {
-      display: none;
-      text-align: center;
-      padding: 10px;
-      font-size: 0.9em;
-    }
-
-    #loading.active {
-      display: block;
-    }
   </style>
 </head>
 <body>
-
   <header>
     <nav class="navbar">
       <div class="logo">Plataforma IA</div>
       <ul class="nav-links">
-        <li><a href="generador-texto.html">Generador de Texto</a></li>
-        <li><a href="buscador.html">Buscador</a></li>
         <li><a href="generador-imagenes.html">Generador de Imágenes</a></li>
         <li><a href="lector.html">Lector de Texto</a></li>
-        <li><a href="generador-av.html">Audio/Video</a></li>
+        <li><a href="generador-video.html">Generador de Video</a></li>
       </ul>
       <div class="toggle-switch" onclick="toggleDarkMode()">🌓 Modo Oscuro</div>
     </nav>
@@ -155,12 +127,10 @@
 
   <main>
     <section class="contenedor">
-      <h1>Generador de Texto</h1>
-      <p>Escribe una idea o mensaje, y esta herramienta lo procesará automáticamente.</p>
-      <textarea id="inputTexto" rows="4" placeholder="Introduce tu texto aquí..."></textarea>
-      <button onclick="generarTexto()">Generar</button>
-      <div id="loading">Cargando herramienta...</div>
-      <div id="textoGenerado" class="resultado"></div>
+      <h1>Generador de Audio</h1>
+      <p>Introduce el contenido que deseas convertir en voz.</p>
+      <textarea id="audioTexto" rows="6" placeholder="Pega aquí un fragmento de texto..."></textarea>
+      <button onclick="reproducirAudio()">Reproducir</button>
     </section>
   </main>
 
@@ -169,14 +139,17 @@
       document.body.classList.toggle('dark-mode');
     }
 
-    function generarTexto() {
-      const texto = document.getElementById("inputTexto").value;
-      const resultado = texto.trim()
-        ? "Texto generado: " + texto.toUpperCase()
-        : "Por favor, introduce un texto válido.";
-      document.getElementById("textoGenerado").innerText = resultado;
+    function reproducirAudio() {
+      const texto = document.getElementById("audioTexto").value.trim();
+      if (!texto) {
+        alert("Por favor, introduce un texto para convertir en audio.");
+        return;
+      }
+      const voz = new SpeechSynthesisUtterance(texto);
+      voz.lang = "es-ES";
+      window.speechSynthesis.cancel();
+      window.speechSynthesis.speak(voz);
     }
-
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-      link.addEventListener
+  </script>
+</body>
+</html>
