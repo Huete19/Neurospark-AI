@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generador de Video - Plataforma IA</title>
+  <style>
+    /* Reutilizamos los estilos para consistencia */
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #111111;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #111111;
+      color: #ffffff;
+    }
+
+    header {
+      background-color: #000000;
+      padding: 1em 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      color: #cccccc;
+      text-decoration: none;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .nav-links li a:hover {
+      color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    .toggle-switch {
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 0.9em;
+    }
+
+    main {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .contenedor {
+      background-color: #f4f4f4;
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid #dddddd;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode .contenedor {
+      background-color: #222222;
+      border-color: #444444;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 14px;
+      font-size: 1em;
+      margin-top: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      color: #000000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode input,
+    body.dark-mode button {
+      background-color: #333333;
+      color: #ffffff;
+    }
+
+    button {
+      background-color: #2f2f2f;
+      color: #ffffff;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #1a1a1a;
+    }
+
+    .resultado {
+      margin-top: 20px;
+      background-color: #e6e6e6;
+      padding: 12px;
+      border-radius: 6px;
+      min-height: 40px;
+      color: #222222;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode .resultado {
+      background-color: #2a2a2a;
+      color: #dddddd;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">Plataforma IA</div>
+      <ul class="nav-links">
+        <li><a href="generador-imagenes.html">Generador de Imágenes</a></li>
+        <li><a href="lector.html">Lector de Texto</a></li>
+        <li><a href="generador-audio.html">Generador de Audio</a></li>
+      </ul>
+      <div class="toggle-switch" onclick="toggleDarkMode()">🌓 Modo Oscuro</div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contenedor">
+      <h1>Generador de Video</h1>
+      <p>Funcionalidad futura: aquí podrás generar o cargar contenido audiovisual.</p>
+      <input type="text"
