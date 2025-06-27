@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generador de Imágenes - Plataforma IA</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #ffffff;
+      color: #111111;
+    }
+
+    header {
+      background-color: #000000;
+      padding: 1em 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      color: #cccccc;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links li a:hover {
+      color: #ffffff;
+    }
+
+    main {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .contenedor {
+      background-color: #f4f4f4;
+      padding: 30px;
+      border-radius: 10px;
+      border: 1px solid #dddddd;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 14px;
+      font-size: 1em;
+      margin-top: 16px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    button {
+      background-color: #2f2f2f;
+      color: #ffffff;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #1a1a1a;
+    }
+
+    .resultado {
+      margin-top: 20px;
+      background-color: #e6e6e6;
+      padding: 12px;
+      border-radius: 6px;
+      min-height: 40px;
+      color: #222222;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav class="navbar">
+      <div class="logo">Plataforma IA</div>
+      <ul class="nav-links">
+        <li><a href="generador-texto.html">Generador de Texto</a></li>
+        <li><a href="buscador.html">Buscador</a></li>
+        <li><a href="generador-imagenes.html">Generador de Imágenes</a></li>
+        <li><a href="lector.html">Lector de Texto</a></li>
+        <li><a href="generador-av.html">Audio/Video</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="contenedor">
+      <h1>Generador de Imágenes</h1>
+      <p>Describe con palabras la imagen que deseas generar y esta herramienta simulará el resultado.</p>
+      <input type="text" id="descripcionImagen" placeholder="Ejemplo: un atardecer sobre montañas nevadas..." />
+      <button onclick="generarImagen()">Generar Imagen</button>
+      <div id="imagenGenerada" class="resultado"></div>
+    </section>
+  </main>
+
+  <script>
+    function generarImagen() {
+      const descripcion = document.getElementById("descripcionImagen").value.trim();
+      const salida = descripcion
+        ? "Simulación: Imagen generada para \"" + descripcion + "\"."
+        : "Por favor, escribe una descripción válida.";
+      document.getElementById("imagenGenerada").innerText = salida;
+    }
+  </script>
+
+</body>
+</html>
