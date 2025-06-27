@@ -1,7 +1,7 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>Lector de Texto - Plataforma IA</title>
   <style>
     body {
@@ -11,61 +11,48 @@
       color: #111111;
       transition: background-color 0.3s, color 0.3s;
     }
-
     body.dark-mode {
       background-color: #111111;
       color: #ffffff;
     }
-
-    header {
-      background-color: #000000;
-      padding: 1em 0;
-    }
-
     .navbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
+      padding: 1em 20px;
+      background-color: #000000;
     }
-
     .logo {
       font-size: 1.5em;
       font-weight: bold;
       color: #ffffff;
     }
-
     .nav-links {
       list-style: none;
       display: flex;
       gap: 20px;
+      margin: 0;
+      padding: 0;
     }
-
     .nav-links li a {
       color: #cccccc;
       text-decoration: none;
       transition: color 0.2s, transform 0.2s;
     }
-
     .nav-links li a:hover {
       color: #ffffff;
       transform: scale(1.05);
     }
-
     .toggle-switch {
       cursor: pointer;
       color: #ffffff;
       font-size: 0.9em;
     }
-
     main {
       padding: 60px 20px;
       max-width: 800px;
       margin: auto;
     }
-
     .contenedor {
       background-color: #f4f4f4;
       padding: 30px;
@@ -73,12 +60,10 @@
       border: 1px solid #dddddd;
       transition: background-color 0.3s, border-color 0.3s;
     }
-
     body.dark-mode .contenedor {
       background-color: #222222;
       border-color: #444444;
     }
-
     textarea, button {
       width: 100%;
       padding: 14px;
@@ -90,13 +75,10 @@
       color: #000000;
       transition: background-color 0.3s, color 0.3s;
     }
-
-    body.dark-mode textarea,
-    body.dark-mode button {
+    body.dark-mode textarea, body.dark-mode button {
       background-color: #333333;
       color: #ffffff;
     }
-
     button {
       background-color: #2f2f2f;
       color: #ffffff;
@@ -105,73 +87,58 @@
       border: none;
       transition: background-color 0.2s ease;
     }
-
     button:hover {
       background-color: #1a1a1a;
     }
-
     #loading {
       display: none;
       text-align: center;
       padding: 10px;
       font-size: 0.9em;
     }
-
     #loading.active {
       display: block;
     }
   </style>
 </head>
 <body>
-
-  <header>
-    <nav class="navbar">
-      <div class="logo">Plataforma IA</div>
-      <ul class="nav-links">
-        <li><a href="generador-texto.html">Generador de Texto</a></li>
-        <li><a href="buscador.html">Buscador</a></li>
-        <li><a href="generador-imagenes.html">Generador de Imágenes</a></li>
-        <li><a href="lector.html">Lector de Texto</a></li>
-        <li><a href="generador-av.html">Audio/Video</a></li>
-      </ul>
-      <div class="toggle-switch" onclick="toggleDarkMode()">🌓 Modo Oscuro</div>
-    </nav>
-  </header>
+  <div id="navbar-placeholder"></div>
 
   <main>
     <section class="contenedor">
       <h1>Lector de Texto</h1>
-      <p>Introduce el contenido que deseas escuchar en voz alta. Ideal para lectura en modo audiolibro.</p>
-      <textarea id="textoLectura" rows="6" placeholder="Pega aquí un fragmento de texto..."></textarea>
-      <button onclick="leerTexto()">Reproducir</button>
+      <p>Introduce un texto y presiona "Leer" para escucharlo en voz alta.</p>
+      <textarea id="textoLectura" rows="6" placeholder="Pega aquí el fragmento que deseas escuchar..."></textarea>
+      <button onclick="leerTexto()">Leer</button>
       <div id="loading">Cargando herramienta...</div>
     </section>
   </main>
 
   <script>
+    fetch("navbar.html")
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById("navbar-placeholder").innerHTML = data;
+        document.querySelectorAll(".nav-links a").forEach(link => {
+          link.addEventListener("click", () => {
+            const loading = document.getElementById("loading");
+            if (loading) loading.classList.add("active");
+          });
+        });
+      });
+
     function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
+      document.body.classList.toggle("dark-mode");
     }
 
     function leerTexto() {
       const texto = document.getElementById("textoLectura").value.trim();
-      if (!texto) {
-        alert("Por favor, introduce un texto para leer.");
-        return;
-      }
+      if (!texto) return alert("Por favor, introduce un texto.");
       const voz = new SpeechSynthesisUtterance(texto);
       voz.lang = "es-ES";
       window.speechSynthesis.cancel();
       window.speechSynthesis.speak(voz);
     }
-
-    const links = document.querySelectorAll('.nav-links a');
-    links.forEach(link => {
-      link.addEventListener('click', () => {
-        document.getElementById('loading').classList.add('active');
-      });
-    });
   </script>
-
 </body>
 </html>
