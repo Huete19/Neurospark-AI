@@ -1,1 +1,10 @@
+/my-project
+├── frontend/       ← Tu Next.js App (ya lo tienes)
+├── backend/        ← Tu API en Node.js (Express)
+│   ├── routes/
+│   │   └── openai.js
+│   ├── services/
+│   │   └── openaiService.js
+│   ├── server.js
+│   └── .env
 
