@@ -9,6 +9,12 @@
       font-family: 'Inter', sans-serif;
       background-color: #ffffff;
       color: #111111;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background-color: #111111;
+      color: #ffffff;
     }
 
     header {
@@ -40,11 +46,18 @@
     .nav-links li a {
       color: #cccccc;
       text-decoration: none;
-      transition: color 0.2s;
+      transition: color 0.2s, transform 0.2s;
     }
 
     .nav-links li a:hover {
       color: #ffffff;
+      transform: scale(1.05);
+    }
+
+    .toggle-switch {
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 0.9em;
     }
 
     main {
@@ -58,6 +71,12 @@
       padding: 30px;
       border-radius: 10px;
       border: 1px solid #dddddd;
+      transition: background-color 0.3s, border-color 0.3s;
+    }
+
+    body.dark-mode .contenedor {
+      background-color: #222222;
+      border-color: #444444;
     }
 
     input, button {
@@ -69,6 +88,13 @@
       border: 1px solid #ccc;
       background-color: #ffffff;
       color: #000000;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode input,
+    body.dark-mode button {
+      background-color: #333333;
+      color: #ffffff;
     }
 
     button {
@@ -77,7 +103,7 @@
       font-weight: 500;
       cursor: pointer;
       border: none;
-      transition: background 0.2s ease;
+      transition: background-color 0.2s ease;
     }
 
     button:hover {
@@ -91,6 +117,23 @@
       border-radius: 6px;
       min-height: 40px;
       color: #222222;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    body.dark-mode .resultado {
+      background-color: #2a2a2a;
+      color: #dddddd;
+    }
+
+    #loading {
+      display: none;
+      text-align: center;
+      padding: 10px;
+      font-size: 0.9em;
+    }
+
+    #loading.active {
+      display: block;
     }
   </style>
 </head>
@@ -106,6 +149,7 @@
         <li><a href="lector.html">Lector de Texto</a></li>
         <li><a href="generador-av.html">Audio/Video</a></li>
       </ul>
+      <div class="toggle-switch" onclick="toggleDarkMode()">🌓 Modo Oscuro</div>
     </nav>
   </header>
 
@@ -115,18 +159,30 @@
       <p>Describe con palabras la imagen que deseas generar y esta herramienta simulará el resultado.</p>
       <input type="text" id="descripcionImagen" placeholder="Ejemplo: un atardecer sobre montañas nevadas..." />
       <button onclick="generarImagen()">Generar Imagen</button>
+      <div id="loading">Cargando herramienta...</div>
       <div id="imagenGenerada" class="resultado"></div>
     </section>
   </main>
 
   <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
+
     function generarImagen() {
       const descripcion = document.getElementById("descripcionImagen").value.trim();
       const salida = descripcion
-        ? "Simulación: Imagen generada para \"" + descripcion + "\"."
+        ? `Simulación: Imagen generada para "${descripcion}".`
         : "Por favor, escribe una descripción válida.";
       document.getElementById("imagenGenerada").innerText = salida;
     }
+
+    const links = document.querySelectorAll('.nav-links a');
+    links.forEach(link => {
+      link.addEventListener('click', () => {
+        document.getElementById('loading').classList.add('active');
+      });
+    });
   </script>
 
 </body>
