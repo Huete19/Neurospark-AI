@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>✨ Plataforma IA Multitarea</title>
+  <title>Plataforma IA Multitarea</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
@@ -13,117 +13,121 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f9fafb;
-      color: #333;
+      background-color: #ffffff;
+      color: #1a1a1a;
       padding: 40px;
+      line-height: 1.6;
     }
 
     h1 {
-      font-size: 2.5em;
-      color: #111;
-      margin-bottom: 30px;
+      font-size: 2.3em;
+      margin-bottom: 40px;
       text-align: center;
+      color: #111111;
     }
 
     section {
-      background-color: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      padding: 24px;
-      margin-bottom: 30px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      max-width: 700px;
+      margin: 0 auto 60px auto;
+      padding: 30px;
+      background-color: #f4f4f4;
+      border-radius: 10px;
+      border: 1px solid #dddddd;
     }
 
     h2 {
       font-size: 1.3em;
-      margin-bottom: 15px;
-      color: #2d3748;
+      margin-bottom: 16px;
+      color: #333333;
     }
 
-    input, textarea, button {
+    textarea, input, button {
       width: 100%;
-      padding: 12px;
-      margin-top: 10px;
-      border: 1px solid #cbd5e0;
-      border-radius: 8px;
+      padding: 14px;
       font-size: 1em;
+      margin-top: 12px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      background-color: #ffffff;
+      color: #000000;
     }
 
     button {
-      background-color: #4f46e5;
-      color: white;
-      font-weight: 600;
-      border: none;
+      background-color: #2f2f2f;
+      color: #ffffff;
+      font-weight: 500;
+      margin-top: 16px;
       cursor: pointer;
       transition: background 0.2s ease;
-      margin-top: 12px;
+      border: none;
     }
 
     button:hover {
-      background-color: #4338ca;
+      background-color: #1a1a1a;
     }
 
-    #textoGenerado, #resultadoBusqueda, #imagenGenerada, #avGenerado {
-      margin-top: 12px;
-      padding: 10px;
-      background-color: #edf2f7;
-      border-radius: 8px;
+    .resultado {
+      margin-top: 16px;
+      background-color: #e6e6e6;
+      padding: 12px;
+      border-radius: 6px;
       min-height: 40px;
+      color: #222222;
     }
   </style>
 </head>
 <body>
 
-  <h1>🤖 Plataforma IA Multitarea</h1>
+  <h1>Plataforma IA Multitarea</h1>
 
-  <section id="generador-texto">
-    <h2>✍️ Generador de Texto</h2>
+  <section>
+    <h2>Generador de Texto</h2>
     <textarea id="inputTexto" rows="3" placeholder="Escribe tu idea..."></textarea>
     <button onclick="generarTexto()">Generar</button>
-    <div id="textoGenerado"></div>
+    <div id="textoGenerado" class="resultado"></div>
   </section>
 
-  <section id="buscador">
-    <h2>🔎 Buscador Inteligente</h2>
-    <input type="text" id="busqueda" placeholder="¿Qué quieres investigar?">
+  <section>
+    <h2>Buscador Inteligente</h2>
+    <input type="text" id="busqueda" placeholder="¿Qué deseas buscar?">
     <button onclick="buscar()">Buscar</button>
-    <div id="resultadoBusqueda"></div>
+    <div id="resultadoBusqueda" class="resultado"></div>
   </section>
 
-  <section id="imagenes">
-    <h2>🖼️ Generador de Imágenes</h2>
-    <input type="text" id="descripcionImagen" placeholder="Describe tu imagen ideal...">
-    <button onclick="generarImagen()">Crear Imagen</button>
-    <div id="imagenGenerada"></div>
+  <section>
+    <h2>Generador de Imágenes</h2>
+    <input type="text" id="descripcionImagen" placeholder="Describe la imagen que deseas...">
+    <button onclick="generarImagen()">Generar Imagen</button>
+    <div id="imagenGenerada" class="resultado"></div>
   </section>
 
-  <section id="lector">
-    <h2>🔊 Lector de Texto</h2>
-    <textarea id="textoParaLeer" rows="2" placeholder="Introduce texto a leer..."></textarea>
-    <button onclick="leerTexto()">Reproducir voz</button>
+  <section>
+    <h2>Lector de Texto</h2>
+    <textarea id="textoParaLeer" rows="2" placeholder="Introduce el texto que deseas escuchar..."></textarea>
+    <button onclick="leerTexto()">Leer en voz alta</button>
   </section>
 
-  <section id="audio-video">
-    <h2>🎵🎬 Generador de Audio y Video</h2>
+  <section>
+    <h2>Generador de Audio y Video</h2>
     <input type="text" id="descripcionAV" placeholder="Describe tu idea multimedia...">
     <button onclick="generarAV()">Generar</button>
-    <div id="avGenerado"></div>
+    <div id="avGenerado" class="resultado"></div>
   </section>
 
   <script>
     function generarTexto() {
       let texto = document.getElementById("inputTexto").value;
-      document.getElementById("textoGenerado").innerText = "📝 Texto generado: " + texto.toUpperCase();
+      document.getElementById("textoGenerado").innerText = "Texto generado: " + texto.toUpperCase();
     }
 
     function buscar() {
       let query = document.getElementById("busqueda").value;
-      document.getElementById("resultadoBusqueda").innerText = "🔎 Resultados simulados para: " + query;
+      document.getElementById("resultadoBusqueda").innerText = "Simulación de búsqueda: " + query;
     }
 
     function generarImagen() {
       let descripcion = document.getElementById("descripcionImagen").value;
-      document.getElementById("imagenGenerada").innerHTML = `<p>🖼️ Imagen creada para: <em>${descripcion}</em></p>`;
+      document.getElementById("imagenGenerada").innerHTML = "Imagen simulada para: \"" + descripcion + "\"";
     }
 
     function leerTexto() {
@@ -134,9 +138,13 @@
 
     function generarAV() {
       let descripcion = document.getElementById("descripcionAV").value;
-      document.getElementById("avGenerado").innerHTML = `<p>🎬 Simulación de contenido generado para: "${descripcion}"</p>`;
+      document.getElementById("avGenerado").innerHTML = "Simulación de contenido multimedia: \"" + descripcion + "\"";
     }
   </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
