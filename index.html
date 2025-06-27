@@ -2,149 +2,87 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Multitool AI </title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <title>Plataforma IA</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
+      margin: 0;
       font-family: 'Inter', sans-serif;
       background-color: #ffffff;
-      color: #1a1a1a;
-      padding: 40px;
-      line-height: 1.6;
-    }
-
-    h1 {
-      font-size: 2.3em;
-      margin-bottom: 40px;
-      text-align: center;
       color: #111111;
     }
 
-    section {
-      max-width: 700px;
-      margin: 0 auto 60px auto;
-      padding: 30px;
+    header {
+      background-color: #000000;
+      padding: 1em 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .logo {
+      font-size: 1.5em;
+      font-weight: bold;
+      color: #ffffff;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+    }
+
+    .nav-links li a {
+      color: #cccccc;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links li a:hover {
+      color: #ffffff;
+    }
+
+    main {
+      padding: 60px 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .contenedor {
       background-color: #f4f4f4;
+      padding: 30px;
       border-radius: 10px;
       border: 1px solid #dddddd;
-    }
-
-    h2 {
-      font-size: 1.3em;
-      margin-bottom: 16px;
-      color: #333333;
-    }
-
-    textarea, input, button {
-      width: 100%;
-      padding: 14px;
-      font-size: 1em;
-      margin-top: 12px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      background-color: #ffffff;
-      color: #000000;
-    }
-
-    button {
-      background-color: #2f2f2f;
-      color: #ffffff;
-      font-weight: 500;
-      margin-top: 16px;
-      cursor: pointer;
-      transition: background 0.2s ease;
-      border: none;
-    }
-
-    button:hover {
-      background-color: #1a1a1a;
-    }
-
-    .resultado {
-      margin-top: 16px;
-      background-color: #e6e6e6;
-      padding: 12px;
-      border-radius: 6px;
-      min-height: 40px;
-      color: #222222;
     }
   </style>
 </head>
 <body>
 
-  <h1>Plataforma IA Multitarea</h1>
+  <header>
+    <nav class="navbar">
+      <div class="logo">Plataforma IA</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="generador-texto.html">Generador de Texto</a></li>
+        <li><a href="buscador.html">Buscador</a></li>
+        <li><a href="generador-imagenes.html">Generador de Imágenes</a></li>
+        <li><a href="lector.html">Lector de Texto</a></li>
+        <li><a href="generador-av.html">Audio/Video</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <section>
-    <h2>Generador de Texto</h2>
-    <textarea id="inputTexto" rows="3" placeholder="Escribe tu idea..."></textarea>
-    <button onclick="generarTexto()">Generar</button>
-    <div id="textoGenerado" class="resultado"></div>
-  </section>
-
-  <section>
-    <h2>Buscador Inteligente</h2>
-    <input type="text" id="busqueda" placeholder="¿Qué deseas buscar?">
-    <button onclick="buscar()">Buscar</button>
-    <div id="resultadoBusqueda" class="resultado"></div>
-  </section>
-
-  <section>
-    <h2>Generador de Imágenes</h2>
-    <input type="text" id="descripcionImagen" placeholder="Describe la imagen que deseas...">
-    <button onclick="generarImagen()">Generar Imagen</button>
-    <div id="imagenGenerada" class="resultado"></div>
-  </section>
-
-  <section>
-    <h2>Lector de Texto</h2>
-    <textarea id="textoParaLeer" rows="2" placeholder="Introduce el texto que deseas escuchar..."></textarea>
-    <button onclick="leerTexto()">Leer en voz alta</button>
-  </section>
-
-  <section>
-    <h2>Generador de Audio y Video</h2>
-    <input type="text" id="descripcionAV" placeholder="Describe tu idea multimedia...">
-    <button onclick="generarAV()">Generar</button>
-    <div id="avGenerado" class="resultado"></div>
-  </section>
-
-  <script>
-    function generarTexto() {
-      let texto = document.getElementById("inputTexto").value;
-      document.getElementById("textoGenerado").innerText = "Texto generado: " + texto.toUpperCase();
-    }
-
-    function buscar() {
-      let query = document.getElementById("busqueda").value;
-      document.getElementById("resultadoBusqueda").innerText = "Simulación de búsqueda: " + query;
-    }
-
-    function generarImagen() {
-      let descripcion = document.getElementById("descripcionImagen").value;
-      document.getElementById("imagenGenerada").innerHTML = "Imagen simulada para: \"" + descripcion + "\"";
-    }
-
-    function leerTexto() {
-      let texto = document.getElementById("textoParaLeer").value;
-      let speech = new SpeechSynthesisUtterance(texto);
-      window.speechSynthesis.speak(speech);
-    }
-
-    function generarAV() {
-      let descripcion = document.getElementById("descripcionAV").value;
-      document.getElementById("avGenerado").innerHTML = "Simulación de contenido multimedia: \"" + descripcion + "\"";
-    }
-  </script>
-
-</body>
-</html>
-
+  <main>
+    <section class="contenedor">
+      <h1>Bienvenido a la Plataforma IA</h1>
+      <p>Selecciona una herramienta desde el menú para comenzar.</p>
+    </section>
+  </main>
 
 </body>
 </html>
