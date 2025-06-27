@@ -141,31 +141,32 @@
     </section>
   </main>
 
-  <script>
-    // Navbar y modo oscuro
-    fetch("navbar.html")
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("navbar-placeholder").innerHTML = data;
-        document.querySelectorAll(".nav-links a").forEach(link => {
-          link.addEventListener("click", () => {
-            const loading = document.getElementById("loading");
-            if (loading) loading.classList.add("active");
-          });
+<script>
+  fetch("/Neurospark-AI/navbar.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("navbar-placeholder").innerHTML = data;
+
+      // Activar indicador de carga al cambiar de página
+      document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+          const loading = document.getElementById("loading");
+          if (loading) loading.classList.add("active");
         });
       });
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-    }
 
-    // Lógica del generador
-    function generarImagen() {
-      const descripcion = document.getElementById("descripcionImagen").value.trim();
-      document.getElementById("imagenGenerada").innerText = descripcion
-        ? `Simulación: Imagen generada para "${descripcion}".`
-        : "Por favor, escribe una descripción válida.";
-    }
-  </script>
+      // Conectar modo oscuro al botón de la navbar
+      const toggle = document.querySelector(".toggle-switch");
+      if (toggle) {
+        toggle.addEventListener("click", toggleDarkMode);
+      }
+    });
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+</script>
+
 </body>
 </html>
 
