@@ -127,32 +127,33 @@
     </section>
   </main>
 
-  <script>
-    fetch("navbar.html")
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById("navbar-placeholder").innerHTML = data;
-        document.querySelectorAll(".nav-links a").forEach(link => {
-          link.addEventListener("click", () => {
-            const loading = document.getElementById("loading");
-            if (loading) loading.classList.add("active");
-          });
+<script>
+  fetch("/Neurospark-AI/navbar.html")
+    .then(res => res.text())
+    .then(data => {
+      document.getElementById("navbar-placeholder").innerHTML = data;
+      document.querySelectorAll(".nav-links a").forEach(link => {
+        link.addEventListener("click", () => {
+          const loading = document.getElementById("loading");
+          if (loading) loading.classList.add("active");
         });
       });
+    });
 
-    function toggleDarkMode() {
-      document.body.classList.toggle("dark-mode");
-    }
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
 
-    function generarAudio() {
-      const texto = document.getElementById("textoAudio").value.trim();
-      if (!texto) return alert("Por favor, escribe algo para reproducir.");
-      const voz = new SpeechSynthesisUtterance(texto);
-      voz.lang = "es-ES";
-      window.speechSynthesis.cancel();
-      window.speechSynthesis.speak(voz);
-    }
-  </script>
+  function generarAudio() {
+    const texto = document.getElementById("textoAudio").value.trim();
+    if (!texto) return alert("Por favor, escribe algo para reproducir.");
+    const voz = new SpeechSynthesisUtterance(texto);
+    voz.lang = "es-ES";
+    window.speechSynthesis.cancel();
+    window.speechSynthesis.speak(voz);
+  }
+</script>
+
 </body>
 </html>
 
